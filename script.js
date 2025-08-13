@@ -1,10 +1,19 @@
-// Intro animation fade out (slower)
+// Intro animation fade out every other letter
 window.addEventListener("load", () => {
   setTimeout(() => {
-    document.getElementById("intro").style.opacity = 0;
+    const letters = document.querySelectorAll(".intro-text span");
+    letters.forEach((letter, index) => {
+      // Fade every other letter first
+      const delay = (index % 2 === 0 ? index : index + letters.length) * 100;
+      setTimeout(() => {
+        letter.style.opacity = 0;
+      }, delay);
+    });
+
+    // Hide the intro after all fades complete
     setTimeout(() => {
       document.getElementById("intro").style.display = "none";
-    }, 3000); // Matches slower fade
+    }, letters.length * 200 + 500);
   }, 2500);
 });
 
